@@ -17,6 +17,7 @@
 package com.google.android.gms.location.sample.geofencing;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +36,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    TextView showLatLong;
+
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
     /**
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
     private Button mAddGeofencesButton;
     private Button mRemoveGeofencesButton;
 
+
     private PendingGeofenceTask mPendingGeofenceTask = PendingGeofenceTask.NONE;
 
     private GoogleMap mMap;
@@ -114,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
 
     private static final int DEFAULT_ZOOM = 15;
 
+
     private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
 
 
@@ -122,9 +128,12 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        showLatLong = (TextView)findViewById(R.id.textView);
+
         // Get the UI widgets.
         mAddGeofencesButton = (Button) findViewById(R.id.add_geofences_button);
         mRemoveGeofencesButton = (Button) findViewById(R.id.remove_geofences_button);
+
 
         // Empty list for storing geofences.
         mGeofenceList = new ArrayList<>();
@@ -151,6 +160,9 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
         mapFragment.getMapAsync((OnMapReadyCallback) this);
     }
 
+
+
+
     private void getLocationPermission() {
         /*
          * Request location permission, so that we can get the location of the
@@ -170,8 +182,6 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -238,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
             {
                 Task locationResult = mFusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(this, new OnCompleteListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
@@ -259,6 +270,9 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
 
                     mMap.addMarker(new MarkerOptions().position(new LatLng(mLastKnownLocation.getLatitude(),
                                     mLastKnownLocation.getLongitude())).title("Current Location"));
+
+             showLatLong.setText("Lat : " + mLastKnownLocation.getLatitude() + " Long: "+  mLastKnownLocation.getLongitude());
+
 
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),

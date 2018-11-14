@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:onClick="addGeofencesButtonHandler"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Add GeoFences" />
 
         <Button
             android:id="@+id/remove_geofences_button"
@@ -49,7 +49,14 @@
             android:layout_height="wrap_content"
             android:onClick="removeGeofencesButtonHandler"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Remove GeoFences" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add Loc" />
 
     </LinearLayout>
 </LinearLayout>

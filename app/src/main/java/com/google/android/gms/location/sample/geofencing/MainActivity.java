@@ -256,13 +256,13 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
                                     .fillColor( Color.argb(100, 150,150,150) )
                                     .radius(1000);
                             mMap.addCircle( circleOptions );
-for(int i=0 ;i<mGeofenceList.size();i++)
-{
-                            mMap.addMarker(new MarkerOptions().position(new LatLng(mLastKnownLocation.getLatitude(),
+
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(mLastKnownLocation.getLatitude(),
                                     mLastKnownLocation.getLongitude())).title("Current Location"));
+
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
-                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));}
+                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         }
 
                         else

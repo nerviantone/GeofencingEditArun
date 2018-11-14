@@ -119,6 +119,11 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
 
     private static final int DEFAULT_ZOOM = 15;
 
+    public double         one =0;
+
+    public double two= 0.0;
+
+
 
     private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
 
@@ -144,7 +149,10 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
         setButtonsEnabledState();
 
         // Get the geofences used. Geofence data is hard coded in this sample.
-        populateGeofenceList();
+
+
+
+
 
        mGeofencingClient = LocationServices.getGeofencingClient(this);
 
@@ -256,7 +264,6 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
 
 
                             mLastKnownLocation = (Location) task.getResult();
-
 
 
 
@@ -421,12 +428,20 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
         mGeofencePendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         return mGeofencePendingIntent;
     }
-
+public void Loc(View v){
+        one = 9.535076;
+        two = 76.9104231;
+    populateGeofenceList();
+}
     /**
      * This sample hard codes geofence data. A real app might dynamically create geofences based on
      * the user's location.
+     *
+     *
      */
     private void populateGeofenceList() {
+
+
         for (Map.Entry<String, LatLng> entry : Constants.BAY_AREA_LANDMARKS.entrySet()) {
 
             mGeofenceList.add(new Geofence.Builder()
@@ -436,8 +451,8 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
 
                     // Set the circular region of this geofence.
                     .setCircularRegion(
-                            entry.getValue().latitude,
-                            entry.getValue().longitude,
+                            one,
+                            two,
                             Constants.GEOFENCE_RADIUS_IN_METERS
                     )
 
@@ -453,6 +468,7 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
                     // Create the geofence.
                     .build());
         }
+
     }
 
     /**

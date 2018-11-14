@@ -429,8 +429,8 @@ public class MainActivity extends AppCompatActivity implements OnCompleteListene
         return mGeofencePendingIntent;
     }
 public void Loc(View v){
-        one = 9.535076;
-        two = 76.9104231;
+        one = mLastKnownLocation.getLatitude();
+        two = mLastKnownLocation.getLongitude();
     populateGeofenceList();
 }
     /**
